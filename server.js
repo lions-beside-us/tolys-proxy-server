@@ -30,4 +30,6 @@ app.use('/users', createProxyMiddleware({
 
 app.listen(port, () => {
   console.log(`proxy server listening on http://localhost:${port}/`)
-})
+});
+
+module.exports = app;
