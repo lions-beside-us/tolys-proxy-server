@@ -1,8 +1,11 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const port = 5000;
+const path = require('path');
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'src')));
 
 app.use('/comments', createProxyMiddleware({
   target: 'http://localhost:4000/',
