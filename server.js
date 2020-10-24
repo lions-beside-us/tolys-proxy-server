@@ -1,14 +1,15 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const port = 5000;
+const port = 80;
 const path = require('path');
 
 const app = express();
 
 app.use(express.static('./dist'));
 
+
 app.use('/comments', createProxyMiddleware({
-  target: 'http://localhost:4000/',
+  target: 'http://3.138.151.252:4000/',
   headers: {
     method: 'GET'
   },
@@ -16,7 +17,7 @@ app.use('/comments', createProxyMiddleware({
 }));
 
 app.use('/hashtags', createProxyMiddleware({
-  target: 'http://localhost:4001/',
+  target: 'http://3.19.209.147:4001/',
   headers: {
     method: 'GET'
   },
@@ -24,7 +25,7 @@ app.use('/hashtags', createProxyMiddleware({
 }));
 
 app.use('/users', createProxyMiddleware({
-  target: 'http://localhost:4002/',
+  target: 'http://3.16.151.4:4002/',
   headers: {
     method: 'GET'
   },
@@ -37,7 +38,41 @@ app.use('/:current', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`proxy server listening on http://localhost:${port}/`)
+  console.log(`proxy server listening on h${port}/`)
 });
+
+// local build
+// app.use('/comments', createProxyMiddleware({
+//   target: 'http://localhost:4000/',
+//   headers: {
+//     method: 'GET'
+//   },
+//   changeOrigin: true
+// }));
+
+// app.use('/hashtags', createProxyMiddleware({
+//   target: 'http://localhost:4001/',
+//   headers: {
+//     method: 'GET'
+//   },
+//   changeOrigin: true
+// }));
+
+// app.use('/users', createProxyMiddleware({
+//   target: 'http://localhost:4002/',
+//   headers: {
+//     method: 'GET'
+//   },
+//   changeOrigin: true
+// }));
+
+// app.use('/:current', (req, res) => {
+//   console.log('hit');
+//   res.sendFile(path.join(__dirname,'/src/index.html'));
+// });
+
+// app.listen(port, () => {
+//   console.log(`proxy server listening on http://localhost:${port}/`)
+// });
 
 module.exports = app;
