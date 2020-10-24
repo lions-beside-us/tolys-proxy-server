@@ -32,6 +32,14 @@ app.use('/users', createProxyMiddleware({
   changeOrigin: true
 }));
 
+app.use('/relatedTracks', createProxyMiddleware({
+  target: 'http://3.15.220.99:3001/',
+  headers: {
+    method: 'GET'
+  },
+  changeOrigin: true
+}));
+
 app.use('/:current', (req, res) => {
   console.log('hit');
   res.sendFile(path.join(__dirname,'/src/index.html'));
