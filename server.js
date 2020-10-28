@@ -48,6 +48,23 @@ app.use('/relatedTracks', createProxyMiddleware({
   changeOrigin: true
 }));
 
+app.use('/artistBio', createProxyMiddleware({
+  target: 'http://34.220.154.45:2000/',
+  headers: {
+    method: 'GET'
+  },
+  changeOrigin: true
+}));
+
+app.use('/songdata', createProxyMiddleware({
+  target: 'http://52.37.102.63:3005/',
+  headers: {
+    method: 'GET'
+  },
+  changeOrigin: true
+}));
+
+
 app.use('/:current', (req, res) => {
   console.log('hit');
   res.sendFile(path.join(__dirname,'/src/index.html'));
